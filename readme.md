@@ -7,9 +7,9 @@ I've created an updated version of the CloudFormation YAML for the static websit
 _a) Troubleshoot the implementation by doing the minimum amount of work required to make the web
 site operational. Your customer expects detailed written troubleshooting instructions or scripts for the in-house team._
 
-- The LoadBalancer was only associated with Public Subnet B, which is empty. Solution is either adding the Public Subnet A (which contains the only EC2 instance NIC) to the list, or replacing Public Subnet B with it. Since the "minimum work" requirement, latter option was chosen.
+- The LoadBalancer was only associated with Public Subnet B, which is empty. Solution is either to add the Public Subnet A (which contains the only EC2 instance NIC) to the list associated with the ELB, or replacing Public Subnet B with A. Since the "minimum work" requirement, latter option was chosen.
 
-- The LoadBalancer needs to be set as "internet-facing" so the DNS record resolves to a public IP, hence can serve the static web content.
+- The LoadBalancer needs to be set as "internet-facing" so the DNS record resolves to a public IP, so it can serve the static web content.
 
 ```
 SAelb:
@@ -21,7 +21,7 @@ SAelb:
         Scheme: 'internet-facing' #set the LB configuration to "internet facing"
 ```
 
-- The HealthCheck for the instance needs to be either set to HTTP, or HTTPS traffic needs to be allowed in SecurityGroup for the App server. Considering the fact that a SSL Cert authority is not set up yet, I went for the HTTP healthcheck.
+- The HealthCheck for the instance needs to be either set to HTTP, or HTTPS traffic needs to be configured. Considering the fact that a SSL Cert authority is not set up yet, I went for the HTTP healthcheck.
 
 ```        
         HealthCheck:
@@ -83,9 +83,9 @@ It's easy to set up and cost effective. I recommend this as the go-to solution f
     - Enable HTTPS by configuring a SSL Cert authority
     - Consider adding another EC2 instance into Public Subnet B (in the separate availability zone (AZ)) for additional availability and add/register the subnet and instance with the LoadBalancer
     - depending on the traffic, consider creating an auto-scaling group to register with the LoadBalancer to accomodate traffic peaks
-    - extending to multiple AZ and auto-scaling for a placeholder content may not be the most effective use of your resources (plain english, can get expensive)
 
-Please consider what Service Level Objectives do you want to set for the placeholder static content.
+
+Please consider what Service Level Objectives do you want to set for the placeholder static content, extending to multiple AZ and auto-scaling is not the most effective use of resources.
 
 
 
@@ -107,4 +107,5 @@ Build CI/CD pipeline:
 Introducing non-prod environments:
 - for the development of the dynamic content, I recommend setting up a QA (Quality Assurance) and possibly STG (Staging) environment
 -  These will enable your dev teams to do thorough functional and performance testing before deploying to the production
-- consider the amount of traffic that's going to be hitting the static and dynamic content of the web app - and relevant SLOs/SLAs for the content, so we can choose a fitting infrastructure.
+
+Consider the amount of traffic that's going to be hitting the static and dynamic content of the web app - and relevant SLOs/SLAs for the content, so we can choose a fitting infrastructure.
