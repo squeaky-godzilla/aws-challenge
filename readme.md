@@ -2,7 +2,7 @@
 
 Hello! Terve!
 
-I've created an updated version of the CloudFormation YAML to quick-fix the current placeholder static website deployment `AWS-SA-Vitek-Urbanec-simplest.yaml`, please see the comments for the requested action points and more detailed information.
+I've created an updated version of the CloudFormation YAML to quick-fix the current placeholder static website deployment `AWS-SA-Vitek-Urbanec-simplest.yaml` _(just upload the template and build the stack, wait for the instance and ELB to come up and you're all set)_, please see the further comments for the requested action points and more detailed information.
 
 Regarding the architectural recommendations: Since you're in the early stages of the app development and not much is known about where you're going to go with it, I suggest we look at the high-level options first without going into detail. The infrastructure should be built to fit your app, not the other way around.
 
