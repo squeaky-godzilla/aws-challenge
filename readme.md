@@ -1,4 +1,4 @@
-# AWS SA Homework
+# AWS Solutions Architect Challenge
 
 Hello! Terve!
 
