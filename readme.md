@@ -116,5 +116,3 @@ Introducing non-prod environments:
 
 
 Consider the amount of traffic that's going to be hitting the static and dynamic content of the web app - and relevant SLOs/SLAs for the content, so we can choose a fitting infrastructure.
-
-Let's discuss the possibilities face to face at our next meeting.
